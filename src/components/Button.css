@@ -21,3 +21,19 @@ button:hover {
 .equals:hover {
   background-color: rgb(228, 39, 15);
 }
+
+.cancel {
+  background-color: #ff203a;
+}
+
+.cancel:hover {
+  background-color: rgb(209, 50, 24);
+}
+
+.symbols {
+  background-color: rgb(243, 61, 29);
+}
+
+.symbols:hover {
+  background-color: rgb(228, 39, 15);
+}

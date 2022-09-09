@@ -2,7 +2,7 @@ import Wrapper from "./components/Wrapper";
 import Screen from "./components/Screen";
 import ButtonBox from "./components/ButtonBox";
 import Button from "./components/Button";
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const btnValues = [
   ["C", "+-", "%", "/"],
@@ -13,7 +13,7 @@ const btnValues = [
 ];
 
 const toLocaleString = (num) =>
-String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
+  String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
 const removeSpaces = (num) => num.toString().replace(/\s/g, "");
 
@@ -33,10 +33,10 @@ function App() {
         ...calc,
         num:
           calc.num === 0 && value === "0"
-          ? value
-          : removeSpaces(calc.num) % 1 === 0
-          ? toLocaleString(Number(removeSpaces(calc.num + value)))
-          : toLocaleString(calc.num + value),
+            ? value
+            : removeSpaces(calc.num) % 1 === 0
+              ? toLocaleString(Number(removeSpaces(calc.num + value)))
+              : toLocaleString(calc.num + value),
         res: !calc.sign ? 0 : calc.res,
       });
     }
@@ -70,17 +70,17 @@ function App() {
         sign === "+"
           ? a + b
           : sign === "-"
-          ? a - b
-          : sign === "X"
-          ? a * b
-          : a / b;
+            ? a - b
+            : sign === "X"
+              ? a * b
+              : a / b;
 
       setCalc({
         ...calc,
         res:
           calc.num === "0" && calc.sign === "/"
             ? "Can't divide by 0"
-            :toLocaleString(
+            : toLocaleString(
               math(
                 Number(removeSpaces(calc.res)),
                 Number(removeSpaces(calc.num)),
@@ -130,24 +130,27 @@ function App() {
         {btnValues.flat().map((btn, i) => {
           return (
             <Button
-            key={i}
-            className={btn === "=" ? "equals" : ""}
-            value={btn}
-            onClick={
-              btn === "C"
+              key={i}
+              className={btn === "="
+                ? "equals"
+                : btn === "C" ? "cancel"
+                  : btn === "+-" || btn === "%" || btn === "=" || btn === "/" || btn === "X" || btn === "-" || btn === "+" || btn === "." ? "symbols" : ""}
+              value={btn}
+              onClick={
+                btn === "C"
                   ? resetClickHandler
                   : btn === "+-"
-                  ? invertClickHandler
-                  : btn === "%"
-                  ? percentClickHandler
-                  : btn === "="
-                  ? equalsClickHandler
-                  : btn === "/" || btn === "X" || btn === "-" || btn === "+"
-                  ? signClickHandler
-                  : btn === "."
-                  ? commaClickHandler
-                  : numClickHandler
-            }
+                    ? invertClickHandler
+                    : btn === "%"
+                      ? percentClickHandler
+                      : btn === "="
+                        ? equalsClickHandler
+                        : btn === "/" || btn === "X" || btn === "-" || btn === "+"
+                          ? signClickHandler
+                          : btn === "."
+                            ? commaClickHandler
+                            : numClickHandler
+              }
             />
           );
         })
